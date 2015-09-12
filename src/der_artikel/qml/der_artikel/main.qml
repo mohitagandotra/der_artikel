@@ -141,7 +141,15 @@ Window{
             if (event.key === Qt.Key_Back) {
                 // Avoid closing the app in android. Instead go to home page.
                 event.accepted = true
-                manager.current_page = Manager.HOME_PAGE
+                if(messageBarInstance.message_bar_visible === true) {
+                    messageBarInstance.setAccepted(false);
+                } else {
+                    if(manager.current_page === Manager.HOME_PAGE) {
+                        manager.quit();
+                    } else {
+                        manager.current_page = Manager.HOME_PAGE;
+                    }
+                }
             }
         }
 
